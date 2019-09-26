@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    tools:context=".books.BookActivity">
+    <EditText
+        android:id="@+id/actionSearch"
+        android:textColorHint="@color/colorTextPrimary"
+        android:hint="@string/hint_search"
+        android:textColor="@color/colorTextPrimary"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="54dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLines="1"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="10dp"
+        android:background="@drawable/search_view_background"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        tools:ignore="Autofill,TextFields"
+
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_content"
+        android:layout_marginTop="134dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecyclerBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        app:layoutManager="@string/recycle_grid"
+        app:spanCount="3"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_list_books" />
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        layout="@layout/item_error"/>
+
+</RelativeLayout>

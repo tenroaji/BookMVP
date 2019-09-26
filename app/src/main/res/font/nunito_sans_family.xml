@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+        android:fontStyle="normal"
+        android:font="@font/nunitosans_regular"
+        android:fontWeight="400"
+        app:fontStyle="normal"
+        app:font="@font/nunitosans_regular"
+        app:fontWeight="400"
+        />
+    <font
+        android:fontStyle="italic"
+        android:font="@font/nunitosans_italic"
+        android:fontWeight="400"
+        app:fontStyle="italic"
+        app:font="@font/nunitosans_italic"
+        app:fontWeight="400"
+        />
+    <font
+        android:fontStyle="normal"
+        android:font="@font/nunitosans_bold"
+        android:fontWeight="700"
+        app:fontStyle="normal"
+        app:font="@font/nunitosans_bold"
+        app:fontWeight="700"
+        />
+    <font
+        android:fontStyle="italic"
+        android:font="@font/nunitosans_bolditalic"
+        android:fontWeight="700"
+        app:fontStyle="italic"
+        app:font="@font/nunitosans_bolditalic"
+        app:fontWeight="700"
+        />
+</font-family>

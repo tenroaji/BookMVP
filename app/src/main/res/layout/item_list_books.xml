@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="start"
+        android:orientation="vertical"
+        tools:ignore="UnusedAttribute"
+        tools:targetApi="m">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/item_image"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars" />
+            <View
+                android:id="@+id/viewAuthors"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="130dp"
+                android:background="@color/backgroundAuthors"/>
+            <TextView
+                android:id="@+id/labelAuthors"
+                android:layout_marginStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:visibility="gone"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="@dimen/size_text_mini"
+                android:text="@string/labelAuthors"
+                />
+            <TextView
+                android:textSize="@dimen/size_text_mini"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextPrimary"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@+id/tvAuthors"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="14sp"
+            tools:text="Sample title" />
+
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rating_book"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:numStars="5"
+            android:stepSize=".1"
+            android:theme="@style/RatingBar" />
+    </LinearLayout>
+

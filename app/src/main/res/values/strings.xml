@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Books</string>
+    <string name="recycle_grid" translatable="false">androidx.recyclerview.widget.GridLayoutManager</string>
+    <string name="labelAuthors">Authors :</string>
+    <string name="dataNotUpdate">Data yang tampil bukanlah data yang terbaru</string>
+    <string name="hint_search">Search</string>
+    <string name="noData">Tidak ada data yang ditemukan</string>
+
+</resources>
