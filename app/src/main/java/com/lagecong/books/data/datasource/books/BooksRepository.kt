@@ -32,11 +32,8 @@ class BooksRepository (context: Context) : BooksDataSource.Local {
         search: String,
         callback: BooksDataSource.LoadListCallback<MutableList<BookResponse>?>
     ) {
-        if (mCacheBook != null && mCacheBook!!.isNotEmpty() && mSearch == search){
-            Log.e("lapar","$search ${mCacheBook?.values}")
-            callback.onSuccess(mCacheBook?.get(search), TypeRepo.CACHE.name)
-            return
-
+        if (mCacheBook != null && mCacheBook!!.containsKey(search) && search == mSearch){
+            callback.onSuccess(mCacheBook!![search], TypeRepo.CACHE.name)
         }else {
             mLocalDataSource?.loadBookBySearch(
                 search,object :BooksDataSource.LoadListCallback<MutableList<BookResponse>?>{
@@ -94,8 +91,9 @@ class BooksRepository (context: Context) : BooksDataSource.Local {
             mCacheBook = LinkedHashMap()
             Log.e("lapar","link null $search ${mCacheBook?.get(search)}")
         }
-        data?: return
-        mCacheBook!!.put(search,data)
+        data?.also {
+            mCacheBook?.put(search,it)
+        }
         Log.e("lapar","link tersimpan $search ${mCacheBook?.get(search)}")
     }
 

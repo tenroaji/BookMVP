@@ -16,7 +16,7 @@
         tools:targetApi="n"
         tools:ignore="GoogleAppIndexingWarning"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen"
+        <activity android:name=".books.BookActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +25,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".books.BookActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

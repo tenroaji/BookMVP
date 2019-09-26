@@ -7,28 +7,25 @@
     android:background="@color/colorPrimaryDark">
 
 
-
     <View
         android:id="@+id/content"
-        android:background="@drawable/background_content"
         android:layout_width="wrap_content"
-        android:layout_height="220dp"
-        >
-    </View>
+        android:layout_height="235dp"
+        android:background="@color/colorPrimary"></View>
 
     <TextView
-        android:padding="8dp"
-        android:background="@drawable/background_content"
         android:id="@+id/textView"
+        android:alpha="0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="190dp"
-        android:textColor="@color/colorTextPrimary"
-        android:textSize="@dimen/size_text_big"
-        android:textStyle="bold"
-
+        android:background="@drawable/background_content"
+        android:padding="16dp"
         android:text="BOOK"
-      />
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="56sp"
+
+        android:textStyle="bold" />
 
 </RelativeLayout>

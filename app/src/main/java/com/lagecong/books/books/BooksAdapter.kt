@@ -23,9 +23,11 @@ class BooksAdapter(private val mWidth: Int) :
     private var show = true
 
     fun updateAdapter(data: MutableList<BookResponse>?) {
-        this.data?.clear()
-        this.data = data
-        notifyDataSetChanged()
+        data?.also {
+            this.data?.clear()
+            this.data?.addAll(it)
+            notifyDataSetChanged()
+        }
     }
 
     fun clearList() {

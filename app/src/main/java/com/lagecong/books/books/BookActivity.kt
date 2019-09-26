@@ -54,7 +54,11 @@ class BookActivity : AppCompatActivity(), BookContracts.View {
 
     override fun onResume() {
         super.onResume()
-        mPresenter.searchBooks("game")
+        if (actionSearch.text.isNullOrEmpty()){
+        mPresenter.searchBooks("game")}
+        else{
+            mPresenter.searchBooks(actionSearch.text.toString())
+        }
     }
 
     override fun showLoadingBooks(show: Boolean) {
