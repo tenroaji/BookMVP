@@ -1,6 +1,5 @@
 package com.lagecong.books.data.datasource.books
 
-import com.lagecong.books.data.models.Book
 import com.lagecong.books.data.models.BookResponse
 
 /**

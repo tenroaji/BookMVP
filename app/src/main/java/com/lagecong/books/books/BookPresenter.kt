@@ -29,9 +29,6 @@ class BookPresenter (val context: Context, val view : BookContracts.View) : Book
                     view.showNoData(context.resources.getString(R.string.noData))
                 }else view.showDataBuku(data)
                 if (load == TypeRepo.LOCAL.name){view.showToastLocal()}
-                Log.e("lapar","load")
-                Log.e("lapar" , "search = $search")
-
             }
 
             override fun onError(code: Int, message: String?) {

@@ -45,7 +45,7 @@ class BooksRemoteDataSource (context: Context) : BooksDataSource {
                 }
 
                 override fun onFailure(call: Call<Book>, t: Throwable) {
-                    callback.onError(0,"$t")
+                    callback.onError(0,"Kesalahan internal server")
                 }
             })
         }

@@ -79,6 +79,7 @@ class BookActivity : AppCompatActivity(), BookContracts.View {
         tvError.text = "$message"
     }
     override fun showError(code: Int, message: String?) {
+        mBooksAdapter.clearList()
         tvError visibility true
         tvError.text = "$message"
     }

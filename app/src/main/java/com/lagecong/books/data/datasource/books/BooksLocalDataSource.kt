@@ -26,7 +26,6 @@ class BooksLocalDataSource (context: Context) : BooksDataSource.Local {
         search: String,
         callback: BooksDataSource.LoadListCallback<MutableList<BookResponse>?>
     ) {
-        Log.e("LOCAL","load")
         val runnable = Runnable {
             val mEntity = mDao.select(search)
             val mList: MutableList<BookResponse> = mutableListOf()
@@ -48,7 +47,6 @@ class BooksLocalDataSource (context: Context) : BooksDataSource.Local {
     }
 
     override fun saveData(search: String, data: MutableList<BookResponse>) {
-        Log.e("LOCAL","save")
         val runnable = Runnable {
             if (data.isNotEmpty()) {
                 val mListBook = ArrayList<BookEntity>()
@@ -64,7 +62,6 @@ class BooksLocalDataSource (context: Context) : BooksDataSource.Local {
     }
 
     override fun deleteDataBySearch(search: String) {
-        Log.e("LOCAL","delete")
         mAppExecutors.diskIO().execute { mDao.deleteBySearch(search) }
     }
 

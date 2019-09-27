@@ -40,7 +40,6 @@ class BooksRepository (context: Context) : BooksDataSource.Local {
                     override fun onSuccess(data: MutableList<BookResponse>?, load: String) {
                         cacheBookSearch(search, data)
                         callback.onSuccess(mCacheBook?.get(search),load)
-                        Log.e("lapar","$search ${mCacheBook?.get(search)}")
                     }
 
                     override fun onError(code: Int, message: String?) {
@@ -68,8 +67,6 @@ class BooksRepository (context: Context) : BooksDataSource.Local {
                     cacheBookSearch(search, data)
                     changeLocal(search,data)
                     callback.onSuccess(mCacheBook?.get(search),load)
-                    Log.e("lapar","$search ${mCacheBook?.get(search)}")
-
                 }
 
                 override fun onError(code: Int, message: String?) {
@@ -89,12 +86,10 @@ class BooksRepository (context: Context) : BooksDataSource.Local {
     private fun cacheBookSearch(search : String , data : MutableList<BookResponse>?){
         if(mCacheBook == null){
             mCacheBook = LinkedHashMap()
-            Log.e("lapar","link null $search ${mCacheBook?.get(search)}")
         }
         data?.also {
             mCacheBook?.put(search,it)
         }
-        Log.e("lapar","link tersimpan $search ${mCacheBook?.get(search)}")
     }
 
 
