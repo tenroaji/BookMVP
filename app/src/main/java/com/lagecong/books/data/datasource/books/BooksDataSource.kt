@@ -19,6 +19,8 @@ interface BooksDataSource {
 
     fun loadBookBySearch(search : String, callback: LoadListCallback<MutableList<BookResponse>?>)
 
+    fun forceUpdate()
+
     interface Local : BooksDataSource {
         fun saveData(search : String, data : MutableList<BookResponse>)
         fun deleteDataBySearch(search : String)

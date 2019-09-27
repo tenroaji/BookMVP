@@ -4,52 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     tools:context=".books.BookActivity">
-    <EditText
-        android:id="@+id/actionSearch"
-        android:textColorHint="@color/colorTextPrimary"
-        android:hint="@string/hint_search"
+
+
+
+    <TextView
+        android:id="@+id/tvRead"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bacalah untuk membuka "
+        android:fontFamily="@font/nunito_sans_semibold_family"
+        android:textStyle="bold"
         android:textColor="@color/colorTextPrimary"
-        android:layout_marginTop="48dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginEnd="54dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:textSize="32sp" />
+
+    <TextView
+
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:id="@+id/tvRead2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRead"
+        android:fontFamily="@font/nunito_sans_black_family"
+        android:text="Jendela dunia"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:textColor="@color/colorTextPrimary"
+         />
+
+    <EditText
+        android:layout_below="@+id/tvRead2"
+        android:id="@+id/actionSearch"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/search_view_background"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:hint="@string/hint_search"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:lines="1"
         android:maxLines="1"
-        android:gravity="center_vertical"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="10dp"
-        android:background="@drawable/search_view_background"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/colorTextPrimary"
+        android:textColorHint="@color/colorTextPrimary"
         tools:ignore="Autofill,TextFields"
 
         />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_content"
-        android:layout_marginTop="134dp"/>
+
+
+
     <androidx.recyclerview.widget.RecyclerView
+        tools:layout_marginStart="@dimen/margin_16dp"
+        tools:layout_marginEnd="@dimen/margin_16dp"
         android:id="@+id/mRecyclerBook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_below="@id/actionSearch"
+        android:layout_marginTop="@dimen/margin_32dp"
         app:layoutManager="@string/recycle_grid"
         app:spanCount="3"
         tools:itemCount="6"
         tools:listitem="@layout/item_list_books" />
 
     <include
+        layout="@layout/item_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        layout="@layout/item_error"/>
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

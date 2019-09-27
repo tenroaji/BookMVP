@@ -51,6 +51,9 @@ class BooksRemoteDataSource (context: Context) : BooksDataSource {
         }
     }
 
+    override fun forceUpdate() {
+    }
+
     companion object{
 
         @Volatile

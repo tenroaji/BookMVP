@@ -39,6 +39,11 @@ class BookPresenter (val context: Context, val view : BookContracts.View) : Book
         })
     }
 
+    override fun forceUpdate() {
+        mRepository.forceUpdate()
+    }
+
+
     override fun loadBooks() {
     }
 

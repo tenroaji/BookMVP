@@ -65,6 +65,8 @@ class BooksLocalDataSource (context: Context) : BooksDataSource.Local {
         mAppExecutors.diskIO().execute { mDao.deleteBySearch(search) }
     }
 
+    override fun forceUpdate() {
+    }
 
     companion object {
         private var INSTANCE: BooksDataSource.Local? = null

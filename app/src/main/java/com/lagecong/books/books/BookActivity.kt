@@ -43,6 +43,7 @@ class BookActivity : AppCompatActivity(), BookContracts.View {
         actionSearch.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(p0: TextView?, actionId: Int, p2: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    mPresenter.forceUpdate()
                     mPresenter.searchBooks(actionSearch.text.toString())
                     return true
                 }
@@ -55,6 +56,7 @@ class BookActivity : AppCompatActivity(), BookContracts.View {
     override fun onResume() {
         super.onResume()
         if (actionSearch.text.isNullOrEmpty()){
+            mPresenter.forceUpdate()
         mPresenter.searchBooks("game")}
         else{
             mPresenter.searchBooks(actionSearch.text.toString())
@@ -62,6 +64,7 @@ class BookActivity : AppCompatActivity(), BookContracts.View {
     }
 
     override fun showLoadingBooks(show: Boolean) {
+        mBooksAdapter.clearList()
         if (tvError.isShown) tvError visibility false
         mProgressBar visibility show
     }

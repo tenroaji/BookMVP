@@ -9,12 +9,12 @@ import com.lagecong.books.utils.TypeRepo
  * Created by Andi Tenroaji Ahmad on 9/26/2019.
  */
 
-class BooksRepository (context: Context) : BooksDataSource.Local {
+class BooksRepository(context: Context) : BooksDataSource.Local {
 
 
-    private var mRemoteDataSource : BooksDataSource? = null
-    private var mLocalDataSource : BooksDataSource.Local? = null
-    private var mCacheBook : MutableMap<String, MutableList<BookResponse>>? = null
+    private var mRemoteDataSource: BooksDataSource? = null
+    private var mLocalDataSource: BooksDataSource.Local? = null
+    private var mCacheBook: MutableMap<String, MutableList<BookResponse>>? = null
     private var mSearch = ""
     private var mForceUpdate = true
 
@@ -32,41 +32,53 @@ class BooksRepository (context: Context) : BooksDataSource.Local {
         search: String,
         callback: BooksDataSource.LoadListCallback<MutableList<BookResponse>?>
     ) {
-        if (mCacheBook != null && mCacheBook!!.containsKey(search) && search == mSearch){
-            callback.onSuccess(mCacheBook!![search], TypeRepo.CACHE.name)
+        if (mForceUpdate) {
+            shouldLoadFromRemote(search,callback)
         }else {
-            mLocalDataSource?.loadBookBySearch(
-                search,object :BooksDataSource.LoadListCallback<MutableList<BookResponse>?>{
-                    override fun onSuccess(data: MutableList<BookResponse>?, load: String) {
-                        cacheBookSearch(search, data)
-                        callback.onSuccess(mCacheBook?.get(search),load)
-                    }
+            if (mCacheBook != null && mCacheBook!!.containsKey(search) && search == mSearch) {
+                callback.onSuccess(mCacheBook!![search], TypeRepo.CACHE.name)
+            } else {
+                mLocalDataSource?.loadBookBySearch(
+                    search, object : BooksDataSource.LoadListCallback<MutableList<BookResponse>?> {
+                        override fun onSuccess(data: MutableList<BookResponse>?, load: String) {
+                            cacheBookSearch(search, data)
+                            callback.onSuccess(mCacheBook?.get(search), load)
+                        }
 
-                    override fun onError(code: Int, message: String?) {
-                        shouldLoadFromRemote(search,callback)
-                    }
+                        override fun onError(code: Int, message: String?) {
+                            shouldLoadFromRemote(search, callback)
+                        }
 
-                })
-            mSearch = search
+                    })
+                mSearch = search
+            }
         }
 
     }
 
     override fun saveData(search: String, data: MutableList<BookResponse>) {
-        mLocalDataSource?.saveData(search,data)
+        mLocalDataSource?.saveData(search, data)
     }
 
     override fun deleteDataBySearch(search: String) {
         mLocalDataSource?.deleteDataBySearch(search)
     }
 
-    private fun shouldLoadFromRemote(search: String, callback: BooksDataSource.LoadListCallback<MutableList<BookResponse>?>){
+    override fun forceUpdate() {
+        mForceUpdate = true
+    }
+
+
+    private fun shouldLoadFromRemote(
+        search: String,
+        callback: BooksDataSource.LoadListCallback<MutableList<BookResponse>?>
+    ) {
         mRemoteDataSource?.loadBookBySearch(
-            search,object :BooksDataSource.LoadListCallback<MutableList<BookResponse>?>{
+            search, object : BooksDataSource.LoadListCallback<MutableList<BookResponse>?> {
                 override fun onSuccess(data: MutableList<BookResponse>?, load: String) {
                     cacheBookSearch(search, data)
-                    changeLocal(search,data)
-                    callback.onSuccess(mCacheBook?.get(search),load)
+                    changeLocal(search, data)
+                    callback.onSuccess(mCacheBook?.get(search), load)
                 }
 
                 override fun onError(code: Int, message: String?) {
@@ -76,33 +88,33 @@ class BooksRepository (context: Context) : BooksDataSource.Local {
             })
     }
 
-    fun changeLocal(search:String,data: MutableList<BookResponse>?) {
+    fun changeLocal(search: String, data: MutableList<BookResponse>?) {
         deleteDataBySearch(search)
         data ?: return
         saveData(search, data)
     }
 
 
-    private fun cacheBookSearch(search : String , data : MutableList<BookResponse>?){
-        if(mCacheBook == null){
+    private fun cacheBookSearch(search: String, data: MutableList<BookResponse>?) {
+        if (mCacheBook == null) {
             mCacheBook = LinkedHashMap()
         }
         data?.also {
-            mCacheBook?.put(search,it)
+            mCacheBook?.put(search, it)
         }
     }
 
 
-    companion object{
+    companion object {
 
         @Volatile
-        private var INSTANCE : BooksRepository? = null
+        private var INSTANCE: BooksRepository? = null
 
         @JvmStatic
-        fun getInstance(context : Context) : BooksRepository {
-            if(INSTANCE == null){
-                synchronized(BooksRepository::class){
-                    if(INSTANCE == null){
+        fun getInstance(context: Context): BooksRepository {
+            if (INSTANCE == null) {
+                synchronized(BooksRepository::class) {
+                    if (INSTANCE == null) {
                         INSTANCE = BooksRepository(context)
                     }
                 }
@@ -111,7 +123,7 @@ class BooksRepository (context: Context) : BooksDataSource.Local {
         }
 
         @JvmStatic
-        fun destroyInstance(){
+        fun destroyInstance() {
             INSTANCE = null
         }
     }

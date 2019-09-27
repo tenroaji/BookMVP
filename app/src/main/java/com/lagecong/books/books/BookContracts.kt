@@ -16,6 +16,8 @@ interface BookContracts {
 
         fun loadBooks()
 
+        fun forceUpdate()
+
     }
 
     interface View : BaseView<Presenter> {
