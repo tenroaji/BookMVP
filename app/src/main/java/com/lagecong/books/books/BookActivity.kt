@@ -3,9 +3,6 @@ package com.lagecong.books.books
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
 import android.util.DisplayMetrics
 import android.view.KeyEvent
 import android.view.WindowManager
@@ -13,12 +10,19 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import com.lagecong.books.R
-import com.lagecong.books.data.models.Book
 import com.lagecong.books.data.models.BookResponse
 import com.lagecong.books.utils.visibility
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_error.*
+import android.app.Activity
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import com.lagecong.books.R
+import android.text.Layout
+
+
+
+
 
 class BookActivity : AppCompatActivity(), BookContracts.View {
 
@@ -43,14 +47,33 @@ class BookActivity : AppCompatActivity(), BookContracts.View {
         actionSearch.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(p0: TextView?, actionId: Int, p2: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    mPresenter.forceUpdate()
-                    mPresenter.searchBooks(actionSearch.text.toString())
+                    if (actionSearch.text.isNullOrEmpty()){
+                        Toast.makeText(this@BookActivity, "Isian search tidak boleh kosong",
+                            Toast.LENGTH_LONG).show()
+                    }else {
+                        val imm = getSystemService(
+                            Activity.INPUT_METHOD_SERVICE
+                        ) as InputMethodManager
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+                        mPresenter.forceUpdate()
+                        mPresenter.searchBooks(actionSearch.text.toString())
+                    }
                     return true
                 }
                 return false
             }
         })
 
+        actionRefresh.setOnClickListener {
+            mPresenter.forceUpdate()
+            mPresenter.searchBooks(actionSearch.text.toString()) }
+
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val inputMethodManager =  getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        return super.dispatchTouchEvent(ev)
     }
 
     override fun onResume() {
@@ -79,11 +102,14 @@ class BookActivity : AppCompatActivity(), BookContracts.View {
     override fun showNoData(message: String) {
         mBooksAdapter.clearList()
         tvError visibility true
+        actionRefresh visibility true
+
         tvError.text = "$message"
     }
     override fun showError(code: Int, message: String?) {
         mBooksAdapter.clearList()
         tvError visibility true
+        actionRefresh visibility true
         tvError.text = "$message"
     }
 

@@ -66,6 +66,7 @@
 
 
 
+
     <androidx.recyclerview.widget.RecyclerView
         tools:layout_marginStart="@dimen/margin_16dp"
         tools:layout_marginEnd="@dimen/margin_16dp"
@@ -84,5 +85,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+    <include layout="@layout/item_loading"
+        android:id="@+id/mProgressBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>
