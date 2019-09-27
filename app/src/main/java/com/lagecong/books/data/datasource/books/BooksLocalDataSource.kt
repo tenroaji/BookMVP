@@ -54,7 +54,7 @@ class BooksLocalDataSource (context: Context) : BooksDataSource.Local {
                 val mListBook = ArrayList<BookEntity>()
                 for ((count, menu) in data.withIndex()) {
                     val dataJson = Gson().toJson(menu)
-                    val dataEntity = BookEntity(count, dataJson, search )
+                    val dataEntity = BookEntity("$count$search", dataJson, search )
                     mListBook.add(dataEntity)
                 }
                 mDao.insertAll(mListBook)
